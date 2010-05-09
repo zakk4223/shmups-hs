@@ -1,0 +1,11 @@
+
+<thead>
+  <tr>
+<% @score_class.content_columns.each do |column| -%>
+
+  <th class="<%= h column.name -%>">
+  <%= h column.name.humanize %>
+  </th>
+<% end -%>
+  </tr>	
+</thead>

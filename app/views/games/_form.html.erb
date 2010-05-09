@@ -1,0 +1,20 @@
+<% form_for(@game) do |f| %>
+  <%= f.error_messages %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <br />
+  <%= f.label :short_name %>
+  <%= f.text_field :short_name %>
+  <br />
+  <%= f.label :entry_split %>
+  <%= f.text_field :entry_split %>
+  <br />
+  <%= f.label :entry_order %>
+  <%= f.text_field :entry_order %>
+  <br />
+  <%= f.label :scoreboard_template %>
+  <%= f.text_area :scoreboard_template %>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>

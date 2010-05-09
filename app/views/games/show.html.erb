@@ -1,0 +1,40 @@
+<h1><%= @game.name -%></h1>
+
+
+<% form_for :game, @game, :url => {:action => :score_entry} do |f| %>
+    <%= f.label "New Entry" %>
+	<%= text_field_tag :score_entry %>
+	<%= f.submit "Submit" %>
+<% end %>
+
+
+<% form_tag game_path(@game), :id => :game_filter, :method => :get do %>
+Only current scores: 
+<%=  check_box_tag :current, params[:current] -%>
+
+<br />
+
+  <% @score_class.filter_columns.each do |column| -%>
+    <%= label_tag column.name -%>
+    <%= select_tag "filters[#{column.name}]", options_for_select([nil] + @score_class.values_for(column.name)), {:multiple => true} %>
+    
+  <% end -%>
+<% end %>
+
+<%= link_to "Show bbcode", game_url(@game, :format => 'bbcode'), :id => 'bbcode_link', :target => '_blank' -%>
+
+<div id="columntarget">
+</div>
+
+<table id="scoretable", class="draggable">
+	<%= render :partial => 'scores_header' %>
+	<%= render :partial => 'score_entry', :collection => @score_scope.ordered -%>
+</table>
+
+<%= link_to 'Edit', edit_game_path(@game) %> |
+<%= link_to 'Back', games_path %>
+
+<%= update_page_tag do |page| 
+	
+  page << "$('#scoretable').columnManager({listTargetID: 'columntarget'});"	
+ end %>
