@@ -1,0 +1,4 @@
+<% form_tag game_scoreentry_path(@game, @entry),  :method => :put do -%>
+	<%= all_input_tags(@entry, 'entry', {}) %>
+	<%= submit_tag 'Update' %>
+<% end %>

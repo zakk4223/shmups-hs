@@ -1,5 +1,5 @@
 $("#scoretable").html( "<%= escape_javascript(
 render(:partial => 'scores_header') + 
-render (:partial => 'score_entry', :collection => @score_scope.ordered) 
+render (:partial => 'score_entry', :collection => @entries.ordered) 
 ) -%>"
 );

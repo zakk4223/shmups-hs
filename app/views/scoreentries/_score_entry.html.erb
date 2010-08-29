@@ -1,0 +1,10 @@
+
+  <tr> 
+<td> <%= link_to '-', edit_game_scoreentry_path(@game, score_entry) -%> </td>
+<% @game.score_entry_class.content_columns.each do |column| -%>
+
+  <td "<%= h column.name -%>">
+  <%= h score_entry[column.name] %>
+  </td>
+<% end -%>
+  </tr>	

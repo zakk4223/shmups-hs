@@ -1,5 +1,6 @@
 class Scoreentry < ActiveRecord::Base
   self.abstract_class = true
+  belongs_to :game
   named_scope :current_scores, :conditions => {:current => true}
   named_scope :ordered, :order => "score DESC"
   
@@ -42,7 +43,13 @@ class Scoreentry < ActiveRecord::Base
     
   end
   def set_current_score
-    self.class.update_all("current = 'f'", ['lower(player) = lower(?) ', self.player])
+    update_condition_string = self.game.current_columns.split(',').map {|cc| "lower(#{cc}) = lower(?)"}.join(" AND ")
+    update_condition_args = []
+    self.game.current_columns.split(',').each do |cc| 
+      update_condition_args << self.read_attribute(cc) 
+    end
+    self.class.update_all("current = 'f'", [update_condition_string, *update_condition_args])
+    #self.class.update_all("current = 'f'", ['lower(player) = lower(?) ', self.player])
     self.current = true
   end
 

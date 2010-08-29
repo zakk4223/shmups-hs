@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100422000703) do
+ActiveRecord::Schema.define(:version => 20100519014728) do
 
   create_table "games", :force => true do |t|
     t.string   "name"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(:version => 20100422000703) do
     t.string   "scoreboard_template"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "current_columns",     :default => "player"
   end
 
   create_table "ketsuis", :force => true do |t|
@@ -31,6 +32,7 @@ ActiveRecord::Schema.define(:version => 20100422000703) do
     t.text     "raw_entry"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "game_id"
   end
 
 end

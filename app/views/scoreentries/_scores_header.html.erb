@@ -1,7 +1,8 @@
 
 <thead>
   <tr>
-<% @score_class.content_columns.each do |column| -%>
+  <th></th>
+<% @game.score_entry_class.content_columns.each do |column| -%>
 
   <th class="<%= h column.name -%>">
   <%= h column.name.humanize %>

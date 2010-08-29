@@ -4,7 +4,17 @@ class Game < ActiveRecord::Base
   
   
 
+  def after_initialize
+    if self.short_name
+      self.class.create_scores_association(self.short_name)
+    end
+  end
   
+  def score_entry_class
+    if self.short_name
+      self.short_name.capitalize.constantize
+    end
+  end
   
   def create_score_entry(entry_string)
     return if not entry_string or entry_string.empty?
@@ -28,13 +38,19 @@ class Game < ActiveRecord::Base
   end
 
 
-  def scores
-    begin
-      score_class = self.short_name.capitalize.constantize
-      return score_class
-    rescue
-      return nil
+#  def scores
+#    begin
+#      score_class = self.short_name.capitalize.constantize
+#      return score_class
+#    rescue
+#      return nil
+#    end
+#  end
+  
+  def self.create_scores_association(game_name)
+    unless reflect_on_aggregation(:scores)
+      reflection = create_reflection(:has_many, :scores, {:class_name => game_name.capitalize}, self)
+      collection_accessor_methods(reflection, HasManyAssociation)
     end
   end
-  
 end

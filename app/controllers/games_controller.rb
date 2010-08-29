@@ -49,7 +49,7 @@ class GamesController < ApplicationController
     else
       flash[:notice] = 'Score update failed. Wonder why!?!?!'
     end
-    redirect_to(@game)
+    redirect_to(game_scoreentries_path(@game))
   end
   
   

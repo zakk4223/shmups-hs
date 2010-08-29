@@ -1,3 +1,2 @@
 class Ketsui < Scoreentry
-  
 end

@@ -1,5 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :games, :member => {:score_entry => :post}
+  map.resources :games, :has_many => [:scoreentries], :member => {:score_entry => :post}
+  map.resources :scoreentries
 
   # The priority is based upon order of creation: first created -> highest priority.
 
