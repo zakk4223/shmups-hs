@@ -1,0 +1,2 @@
+class Esprade < Scoreentry
+end
